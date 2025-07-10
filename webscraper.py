@@ -61,8 +61,6 @@ def parse_rules_to_json(html_doc, url): # Added url argument for context
         rules_data['main_rule_title'] = main_rule_title_tag.get_text(strip=True)
     else:
         print(f"Warning: Main rule title not found for {url}")
-        # Optionally return None or populate with a placeholder if a title is crucial
-        # return None
 
     # Extract purpose of the rule
     purpose_section = soup.find('div', class_='rule-purpose')
@@ -182,18 +180,35 @@ def save_to_json(data, filename):
         print(f"Error saving to file {filename}: {e}")
 
 if __name__ == "__main__":
-    # List of URLs to process
-    # Example: Rules 1 to 25. You'll need to confirm the actual URLs are in this format.
-    base_url = "https://www.randa.org/rules/rules-of-golf/rule-"
-    urls_to_scrape = ["https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=4", "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=5","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=6", "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=7", "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=8", "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=9","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=10", "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=11","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=12","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=13","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=14","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=15","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=16"
-    "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=17","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=18","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=19","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=20","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=21", "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=22","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=23","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=24","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=25","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=26","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=27","https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=28"] 
+    urls_to_scrape = [
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=4",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=5",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=6",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=7",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=8",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=9",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=10",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=11",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=12",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=13",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=14",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=15",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=16",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=17",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=18",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=19",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=20",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=21",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=22",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=23",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=24",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=25",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=26",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=27",
+        "https://www.usga.org/rules/rules-and-clarifications/rules-and-clarifications.html#section=rules&itemNum=28"
+    ] 
 
     all_parsed_data = [] # This list will hold data for all rules
-
-    # It's good practice to initialize the driver once if you're scraping many pages
-    # from the same site, but for robustness against crashes, we're keeping it
-    # initialized per fetch_html_with_selenium call. If you experience performance
-    # issues or frequent restarts, consider passing a single driver instance.
 
     for url in urls_to_scrape:
         html_content = fetch_html_with_selenium(url, wait_time=3)
