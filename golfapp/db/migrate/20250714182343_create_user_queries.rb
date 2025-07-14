@@ -3,7 +3,6 @@ class CreateUserQueries < ActiveRecord::Migration[8.0]
     create_table :user_queries do |t|
       t.text :content
       t.text :response_text
-      t.references :user, null: false, foreign_key: true
       t.string :session_id
       t.integer :feedback
       t.references :rule_section, null: false, foreign_key: true

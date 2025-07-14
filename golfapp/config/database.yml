@@ -22,7 +22,13 @@ default: &default
 
 development:
   <<: *default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
   database: golfapp_development
+  pool: 5
+  username: postgres
+  password: password
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -57,6 +63,9 @@ development:
 test:
   <<: *default
   database: golfapp_test
+  username: postgres
+  password: password # Make sure this matches!
+  host: localhost
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
