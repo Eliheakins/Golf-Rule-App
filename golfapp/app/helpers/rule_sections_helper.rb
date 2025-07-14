@@ -1,0 +1,2 @@
+module RuleSectionsHelper
+end

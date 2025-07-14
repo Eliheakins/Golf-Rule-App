@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @rule_section %>
+
+<div>
+  <%= link_to "Edit this rule section", edit_rule_section_path(@rule_section) %> |
+  <%= link_to "Back to rule sections", rule_sections_path %>
+
+  <%= button_to "Destroy this rule section", @rule_section, method: :delete %>
+</div>

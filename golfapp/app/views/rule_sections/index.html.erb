@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Rule sections" %>
+
+<h1>Rule sections</h1>
+
+<div id="rule_sections">
+  <% @rule_sections.each do |rule_section| %>
+    <%= render rule_section %>
+    <p>
+      <%= link_to "Show this rule section", rule_section %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New rule section", new_rule_section_path %>
