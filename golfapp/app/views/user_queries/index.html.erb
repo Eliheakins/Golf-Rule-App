@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "User queries" %>
+
+<h1>User queries</h1>
+
+<div id="user_queries">
+  <% @user_queries.each do |user_query| %>
+    <%= render user_query %>
+    <p>
+      <%= link_to "Show this user query", user_query %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New user query", new_user_query_path %>

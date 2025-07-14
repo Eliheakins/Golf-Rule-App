@@ -15,11 +15,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_174700) do
     t.string "title"
     t.text "text_content"
     t.string "source_url"
-    t.integer "parent_id", null: false
+    t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_rule_sections_on_parent_id"
   end
 
-  add_foreign_key "rule_sections", "parents"
+  add_foreign_key "rule_sections", "rule_sections", column: "parent_id"
 end

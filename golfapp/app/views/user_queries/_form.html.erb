@@ -1,0 +1,43 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h1 class="card-title h3 mb-0">Ask a Golf Rule Question</h1>
+        </div>
+        <div class="card-body">
+
+          <% if @user_query.errors.any? %>
+            <div id="error_explanation" class="alert alert-danger">
+              <h4 class="alert-heading"><%= pluralize(@user_query.errors.count, "error") %> prohibited this question from being saved:</h4>
+              <ul>
+                <% @user_query.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <%= form_with(model: @user_query, local: true, class: "needs-validation", novalidate: true) do |form| %>
+            <div class="mb-3">
+              <%= form.label :content, "Your Question:", class: "form-label fw-bold" %>
+              <%= form.text_area :content,
+                                 rows: 5,
+                                 class: "form-control",
+                                 placeholder: "e.g., What happens if my ball accidentally hits another player's ball?",
+                                 required: true %>
+              <div class="invalid-feedback">
+                Please enter your question.
+              </div>
+            </div>
+
+            <div class="d-grid gap-2">
+              <%= form.submit "Get Answer", class: "btn btn-success btn-lg" %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

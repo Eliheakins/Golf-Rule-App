@@ -1,0 +1,12 @@
+<% content_for :title, "Editing user query" %>
+
+<h1>Editing user query</h1>
+
+<%= render "form", user_query: @user_query %>
+
+<br>
+
+<div>
+  <%= link_to "Show this user query", @user_query %> |
+  <%= link_to "Back to user queries", user_queries_path %>
+</div>

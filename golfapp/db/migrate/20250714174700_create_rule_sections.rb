@@ -4,7 +4,7 @@ class CreateRuleSections < ActiveRecord::Migration[8.0]
       t.string :title
       t.text :text_content
       t.string :source_url
-      t.references :parent, null: false, foreign_key: true
+      t.references :parent, foreign_key: { to_table: :rule_sections }, null: true
 
       t.timestamps
     end
