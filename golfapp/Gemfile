@@ -44,6 +44,8 @@ gem 'faraday', '~> 2.0'
 gem 'faraday-net_http', '~> 3.0'
 gem 'dotenv', groups: [:development, :test]
 gem 'pgvector' # For vector embeddings in PostgreSQL
+gem 'tailwindcss-rails', '~> 2.0' # For Tailwind CSS integration
+gem "cssbundling-rails"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

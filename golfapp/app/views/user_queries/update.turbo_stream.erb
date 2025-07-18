@@ -1,0 +1,3 @@
+<%# app/views/user_queries/update.turbo_stream.erb %>
+
+<%= turbo_stream.replace @user_query, partial: "user_queries/user_query", locals: { user_query: @user_query } %>

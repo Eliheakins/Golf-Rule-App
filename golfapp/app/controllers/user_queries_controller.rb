@@ -25,6 +25,16 @@ class UserQueriesController < ApplicationController
 
     respond_to do |format|
       if @user_query.save
+        if @user_query.embedding.present?
+          nearest_neighbors = RuleSection.nearest_neighbors(@user_query.embedding, limit: 5, distance_metric: '<->')
+          @user_query.rule_sections.concat(nearest_neighbors)
+        else
+          # Log a warning for debugging
+          Rails.logger.warn "Embedding not generated for UserQuery #{@user_query.id}. Skipping nearest neighbors association."
+          # Optionally, add a flash message to inform the user (e.g., if finding rules is critical)
+          flash[:alert] = "User query created, but could not find related rules due to an embedding issue."
+        end
+
         format.html { redirect_to @user_query, notice: "User query was successfully created." }
         format.json { render :show, status: :created, location: @user_query }
       else
@@ -36,12 +46,16 @@ class UserQueriesController < ApplicationController
 
   # PATCH/PUT /user_queries/1 or /user_queries/1.json
   def update
-    respond_to do |format|
-      if @user_query.update(user_query_params)
-        format.html { redirect_to @user_query, notice: "User query was successfully updated." }
+    if @user_query.update(user_query_params)
+      respond_to do |format|
+        format.html { redirect_to @user_query, notice: "Feedback updated successfully." } 
+        format.turbo_stream
         format.json { render :show, status: :ok, location: @user_query }
-      else
+      end
+    else
+      respond_to do |format|
         format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@user_query, partial: "user_queries/user_query", locals: { user_query: @user_query }) }
         format.json { render json: @user_query.errors, status: :unprocessable_entity }
       end
     end

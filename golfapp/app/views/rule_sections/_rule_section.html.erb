@@ -1,22 +1,43 @@
-<div id="<%= dom_id rule_section %>">
-  <p>
-    <strong>Title:</strong>
-    <%= rule_section.title %>
-  </p>
+<% #
+ # This partial displays details for a RuleSection, separating each hierarchical component.
+ #
+ # Local variables:
+ # - rule_section: The RuleSection object to display.
+ # - display_distance: Float, if present, displays a similarity distance (e.g., from a search result).
+ # - show_links: Boolean, if true, displays show/edit/delete links for the rule (default: false).
+ #
+ %>
+<div class="rule-section bg-white p-4 mb-4 rounded-lg shadow-md border border-gray-200" id="<%= dom_id rule_section %>">
+  <div class="rule-hierarchy">
+    <% # Combine ancestors and the current rule_section to iterate through the entire path %>
+    <% (rule_section.ancestors + [rule_section]).each_with_index do |part, index| %>
+      <%
+        # Dynamically apply left margin for indentation.
+        # Using ml-4 (16px) as the base unit for each level.
+        # This creates a clear visual hierarchy with default Tailwind classes.
+        margin_class = "ml-#{index * 4}"
+      %>
+      <div class="rule-level border-l-4 border-blue-400 pl-4 py-2 <%= margin_class %>">
+        <p class="text-gray-800">
+          <% if part.title.present? %>
+            <strong class="rule-title block text-lg font-bold mb-1"><%= part.title %></strong>
+          <% end %>
+          <span class="rule-content text-base leading-relaxed"><%= part.text_content %></span>
+        </p>
+      </div>
+    <% end %>
+  </div>
 
-  <p>
-    <strong>Text content:</strong>
-    <%= rule_section.text_content %>
-  </p>
+  <% if local_assigns[:display_distance].present? %>
+    <p class="rule-distance text-sm italic text-gray-500 mt-2 px-4">
+      (Similarity Distance: <%= '%.4f' % display_distance %>)
+    </p>
+  <% end %>
 
-  <p>
-    <strong>Source url:</strong>
-    <%= rule_section.source_url %>
-  </p>
-
-  <p>
-    <strong>Parent:</strong>
-    <%= rule_section.parent_id %>
-  </p>
-
+  <% if local_assigns[:show_links] %>
+    <div class="rule-actions flex justify-end mt-4 px-4">
+      <%= link_to "Show Rule", rule_section_path(rule_section), class: "inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out mr-2" %>
+      <% # You can add other links (edit, delete) here with similar styling %>
+    </div>
+  <% end %>
 </div>

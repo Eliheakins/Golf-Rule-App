@@ -3,8 +3,7 @@
 <%= render @user_query %>
 
 <div>
-  <%= link_to "Edit this user query", edit_user_query_path(@user_query) %> |
   <%= link_to "Back to user queries", user_queries_path %>
-
+  <%= link_to "New User Query", new_user_query_path %>
   <%= button_to "Destroy this user query", @user_query, method: :delete %>
 </div>

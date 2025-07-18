@@ -3,7 +3,10 @@ class RuleSectionsController < ApplicationController
 
   # GET /rule_sections or /rule_sections.json
   def index
-    @rule_sections = RuleSection.all
+    @top_level_rule_sections = RuleSection.top_level.includes(:children)
+    @top_level_rule_sections = @top_level_rule_sections.sort_by do |rs|
+      rs.title.scan(/\d+|\D+/).map { |s| s.match?(/\d/) ? s.to_i : s }
+    end
   end
 
   # GET /rule_sections/1 or /rule_sections/1.json
