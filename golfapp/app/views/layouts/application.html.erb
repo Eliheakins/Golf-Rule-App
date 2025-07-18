@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GolfApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  </head>
+
+  <body class="font-sans antialiased bg-neutral-lightest text-neutral-dark min-h-screen flex flex-col">
+    <header class="bg-primary text-text-on-primary p-4 shadow-md">
+      <div class="container mx-auto flex justify-between items-center">
+        <%= link_to "GolfApp", root_path, class: "text-2xl font-heading font-extrabold" %>
+        <nav class="space-x-4">
+          <%= link_to "Queries", user_queries_path, class: "hover:text-opacity-80 transition-colors duration-200" %>
+          <%= link_to "Rules", rule_sections_path, class: "hover:text-opacity-80 transition-colors duration-200" %> <%# Assuming you'll create rule_sections_path later %>
+          <%# Add other navigation links %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container mx-auto flex-grow p-4 mt-4">
+      <p class="text-primary mb-4"><%= notice %></p> <%# Using primary for notices %>
+      <p class="text-red-500 mb-4"><%= alert %></p> <%# Keeping a standard red for alerts for urgency %>
+      <%= yield %>
+    </main>
+
+    <footer class="bg-primary text-text-on-primary p-4 mt-8 text-center text-sm">
+      <p>&copy; <%= Time.current.year %> GolfApp. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

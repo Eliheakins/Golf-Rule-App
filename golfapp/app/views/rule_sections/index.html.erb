@@ -1,0 +1,18 @@
+<%# app/views/rule_sections/index.html.erb %>
+
+<div class="container mx-auto p-6 bg-gray-100 rounded-lg shadow-lg mt-8 mb-8">
+  <h1 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">Golf Rule Sections & Regulations</h1>
+
+  <% if @top_level_rule_sections.any? %>
+    <div class="space-y-6"> <%# Adds vertical space between top-level rule section blocks %>
+      <% @top_level_rule_sections.each do |rule_section| %>
+        <%= render "rule_sections/collapsible_rule_section", rule_section: rule_section %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-700 p-4 rounded" role="alert">
+      <p class="font-bold text-lg">No Rule Sections Defined</p>
+      <p class="text-base">It looks like there are no top-level rule sections configured yet. Please add some rule sections to get started!</p>
+    </div>
+  <% end %>
+</div>
